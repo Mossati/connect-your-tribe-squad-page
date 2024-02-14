@@ -2,7 +2,7 @@
       <h2>Squads</h2>
       <ul>
         <% squads.forEach(squad => { %>
-          <li>Squad <%= squad.name %>, id <%= squad.id %>, tribe_id <%= squad.tribe_id %></li>
+          <li><a href="./squad/<%= squad.id %>">Squad <%= squad.name %>, id <%= squad.id %>, tribe_id <%= squad.tribe_id %></a></li>
         <% }) %>
       </ul>
     </section>
