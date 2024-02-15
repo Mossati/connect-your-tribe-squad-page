@@ -2,12 +2,22 @@
 
 <a href="/">Back</a>
 
-<h2>Name: <%= squad.name %></h2>
-
-<ul>
-<% persons.forEach(person => { %>
-<li><% person.name %></li>
-<% }) %>
-</ul>
+<main>
+    <section>
+        <h1>Squad <%= squad.name %></h1>
+        <ul class="card-list">
+            <% persons.forEach(person => { %>
+            <li class="card-item">
+                <h2><%= person.name + " " + person.prefix + " " + person.surname %></h2>
+                <p>Nickname: <%= person.nickname %></p>
+                <div class="btn-row">
+                    <a class="btn btn-profile" href="#"><i class="fa-brands fa-github"></i> Github</a>
+                    <button class="btn btn-flip"><i class="fa-solid fa-repeat"></i> Flip</button>
+                </div>
+            </li>
+            <% }) %>
+        </ul>
+    </section>
+</main>
 
 <%- include('./partials/foot') %>

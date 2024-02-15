@@ -9,7 +9,6 @@ const apiUrl = 'https://fdnd.directus.app/items'
 
 // Haal alle squads uit de WHOIS API op
 const squadData = await fetchJson(apiUrl + '/squad')
-const personData = await fetchJson(apiUrl + '/person')
 
 // Maak een nieuwe express app aan
 const app = express()
@@ -54,8 +53,10 @@ app.get('/person/:id', function (request, response) {
 app.get('/squad/:id', function (request, response) {
   // Gebruik de request parameter id en haal de juiste persoon uit de WHOIS API op
   fetchJson(apiUrl + '/squad/' + request.params.id).then((apiData) => {
-    // Render person.ejs uit de views map en geef de opgehaalde data mee als variable, genaamd person
-    response.render('squad', {squad: apiData.data, persons: personData.data, squads: squadData.data})
+    fetchJson(apiUrl + '/person?filter[squad_id]=' + request.params.id).then((personData) => {
+      // Render person.ejs uit de views map en geef de opgehaalde data mee als variable, genaamd person
+      response.render('squad', {squad: apiData.data, persons: personData.data, squads: squadData.data})
+    })
   })
 })
 
