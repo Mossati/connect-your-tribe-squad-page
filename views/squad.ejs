@@ -8,6 +8,7 @@
         <ul class="card-list">
             <% persons.forEach(person => { %>
             <li class="card-item">
+                <img src="<%= person.avatar.includes('https') ? person.avatar : '/assets/person.png' %>" alt="avatar">
                 <article class="card-content">
                     <h2><%= person.name + " " + person.prefix + " " + person.surname %></h2>
                     <ul>

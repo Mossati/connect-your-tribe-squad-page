@@ -52,6 +52,11 @@ main {
     font-weight: 600;
 }
 
+.btn:hover {
+    background-color: var(--header-text-color);
+    color: var(--text-color);
+}
+
 .btn-profile {
     background-color: var(--header-bg-color);
     color: var(--text-color);
@@ -84,13 +89,14 @@ section {
         width: 100%;
 
         & .card-item {
-            background-image: url('/assets/background.avif');
+            background-color: var(--bg-color-1);
+            /* background-image: url('/assets/background.avif'); */
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
             padding: 1em;
             border-radius: 1em;
-            border: 0.1em solid var(--bg-color-2);
+            border: 0.1em solid var(--text-color);
             margin-bottom: 1em;
             width: 100%;
             height: 25em;
@@ -112,8 +118,16 @@ section {
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: cover;
-                opacity: 0.2;
+                opacity: 0.1;
                 z-index: -1;
+            }
+
+            & img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
             }
 
             & .card-content {
