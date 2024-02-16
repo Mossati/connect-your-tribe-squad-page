@@ -49,11 +49,12 @@ main {
     font-size: var(--text-size);
     width: 100%;
     text-align: center;
+    font-weight: 600;
 }
 
 .btn-profile {
     background-color: var(--header-bg-color);
-    color: var(--header-text-color);
+    color: var(--text-color);
     margin-right: 1em;
 }
 
@@ -71,6 +72,7 @@ section {
         padding: 1em;
         width: 100%;
         margin-bottom: 1em;
+        border-radius: 1em;
     }
 
     & .card-list {
@@ -82,7 +84,6 @@ section {
         width: 100%;
 
         & .card-item {
-            /* background-color: var(--bg-color-1); */
             background-image: url('/assets/background.avif');
             background-position: center;
             background-size: cover;
@@ -115,18 +116,41 @@ section {
                 z-index: -1;
             }
 
-            & h2, p {
-                color: var(--text-color);
-            }
-
-            & .btn-row {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                margin-top: 1em;
+            & .card-content {
                 z-index: 1;
+
+                & h2 {
+                    color: var(--text-color);
+                    text-align: center;
+                    margin-bottom: 0.5em;
+                }
+
+                & ul {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    list-style-type: none;
+
+                    & li {
+                        color: var(--text-color);
+                        margin-right: 1em;
+                        position: relative;
+
+                        & :nth-last-child() {
+                            margin-right: 0;
+                        }
+                    }
+                }
+    
+                & .btn-row {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    margin-top: 1em;
+                }
             }
         }
     }
