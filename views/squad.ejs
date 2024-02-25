@@ -2,31 +2,66 @@
 
 <a href="/">Back</a>
 
+<header>
+    <%- include('./navbar') %>
+</header>
 <main>
     <section>
         <h1>Squad <%= squad.name %></h1>
         <ul class="card-list">
             <% persons.forEach(person => { %>
+            <% 
+            let fullname = person.name + " " + person.prefix + " " + person.surname; 
+            let squadName;
+            %>
+
+            <% squads.forEach(squad => {
+                if (squad.id == person.squad_id) {
+                    squadName = squad.name;
+                }
+            })
+            %>
             <li class="card-item">
                 <img src="<%= person.avatar.includes('https') ? person.avatar : '/assets/person.png' %>" alt="avatar">
-                <article class="card-content">
-                    <h2><%= person.name + " " + person.prefix + " " + person.surname %></h2>
+                <article class="card-content card-front content-visible">
+                    <h2><%= fullname %></h2>
                     <ul>
                         <li>
-                            <% if (person.nickname !== "") { %>
-                                <i class="fa-solid fa-signature"></i> <%= person.nickname %>
-                            <% } %>
+                            <i class="fa-solid fa-signature"></i> <%= person.nickname !== "" ? person.nickname : '...' %>
                         </li>
-
-                        <% squads.forEach(squad => { %>
-                            <% if (squad.id == person.squad_id) { %>
-                                <li><i class="fa-solid fa-people-group"></i> <%= squad.name %></li>
-                        <% } }) %>
+                        <li><i class="fa-solid fa-people-group"></i> <%= squadName %></li>
                     </ul>
                     <div class="btn-row">
-                        <a class="btn btn-profile" href="#"><i class="fa-brands fa-github"></i> Github</a>
+                        <a class="btn btn-profile" href="<%= person.website %>"><i class="fa-brands fa-github"></i> Github</a>
                         <button class="btn btn-flip"><i class="fa-solid fa-repeat"></i> Flip</button>
                     </div>
+                </article>
+
+                <article class="card-content card-back content-hidden">
+                    <h2>Information</h2>
+                    <ul>
+                        <li>
+                            <h3><i class="fa-solid fa-user"></i> Name</h3>
+                            <p><%= fullname %></p>
+                        </li>
+                        <li>
+                            <h3><i class="fa-solid fa-signature"></i> Nickname</h3>
+                            <p><%= person.nickname %></p>
+                        </li>
+                        <li>
+                            <h3><i class="fa-solid fa-people-group"></i> Squad</h3>
+                            <p><%= squadName %></p>
+                        </li>
+                        <li>
+                            <h3><i class="fa-regular fa-building"></i> Role</h3>
+                            <p><%= person.role %></p>
+                        </li>
+                        <li>
+                            <h3><i class="fa-solid fa-circle-info"></i> Bio</h3>
+                            <p><%= person.bio %></p>
+                        </li>
+                    </ul>
+                    <button class="btn btn-flip"><i class="fa-solid fa-repeat"></i> Flip</button>
                 </article>
             </li>
             <% }) %>
