@@ -1,9 +1,9 @@
 <nav>
     <section>
         <h2>Squad Page</h2>
-        <button><i class="fa-solid fa-bars"></i> Menu</button>
+        <button class="btn-menu"><i class="fa-solid fa-bars"></i> Menu</button>
     </section>
-    <ul>
+    <ul class="navbar content-hidden">
         <% squads.forEach(squad => { %>
             <li><a href="./<%= squad.id %>">Squad <%= squad.name %></a></li>
         <% }) %>

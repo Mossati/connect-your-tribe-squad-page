@@ -22,6 +22,8 @@ app.set('views', './views')
 // Gebruik de map 'public' voor statische resources, zoals stylesheets, afbeeldingen en client-side JavaScript
 app.use(express.static('public'))
 
+app.use(express.urlencoded({extended: true}))
+
 // Maak een GET route voor de index
 app.get('/', function (request, response) {
   // Haal alle personen uit de WHOIS API op
@@ -32,12 +34,6 @@ app.get('/', function (request, response) {
     // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
     response.render('index', {persons: apiData.data, squads: squadData.data})
   })
-})
-
-// Maak een POST route voor de index
-app.post('/', function (request, response) {
-  // Er is nog geen afhandeling van POST, redirect naar GET op /
-  response.redirect(303, '/')
 })
 
 // Maak een GET route voor een detailpagina met een request parameter id
@@ -54,8 +50,44 @@ app.get('/squad/:id', function (request, response) {
   // Gebruik de request parameter id en haal de juiste persoon uit de WHOIS API op
   fetchJson(apiUrl + '/squad/' + request.params.id).then((apiData) => {
     fetchJson(apiUrl + '/person?filter[squad_id]=' + request.params.id).then((personData) => {
+      personData.data.forEach((person) => {
+        try {
+          person.custom = JSON.parse(person.custom);
+        } catch (e) {
+          person.custom = {};
+        }
+      });
       // Render person.ejs uit de views map en geef de opgehaalde data mee als variable, genaamd person
       response.render('squad', {squad: apiData.data, persons: personData.data, squads: squadData.data})
+    })
+  })
+})
+
+// Maak een POST route voor de index
+app.post('/squad/:id', function (request, response) {
+  const personId = request.body.personId;
+  // haal de huidige gegevens op van de persoon
+  fetchJson(apiUrl + '/person/' + personId).then((apiResponse) => {
+    try {
+      apiResponse.data.custom = JSON.parse(apiResponse.data.custom)
+    } catch (e) {
+      apiResponse.data.custom = {}
+    }
+
+    // voeg like toe
+    apiResponse.data.custom.likes = (apiResponse.data.custom.likes || 0) + 1;
+
+    // overschrijf custom field
+    fetchJson(apiUrl + '/person/' + personId, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        custom: apiResponse.data.custom
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    }).then((patchResponse) => {
+      response.redirect(303, '/squad/' + apiResponse.data.squad_id)
     })
   })
 })
