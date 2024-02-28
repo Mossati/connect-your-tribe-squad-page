@@ -1,11 +1,11 @@
 <nav>
     <section>
-        <h2>Squad Page</h2>
+        <h2>Squad <%= squad.name %></h2>
         <button class="btn-menu"><i class="fa-solid fa-bars"></i> Menu</button>
     </section>
     <ul class="navbar content-hidden">
         <% squads.forEach(squad => { %>
-            <li><a href="./<%= squad.id %>">Squad <%= squad.name %></a></li>
+            <li><a href="./squad/<%= squad.id %>">Squad <%= squad.name %></a></li>
         <% }) %>
     </ul>
 </nav>

@@ -71,6 +71,35 @@ app.get('/squad/:id', function (request, response) {
 })
 
 // Maak een POST route voor de index
+app.post('/', function (request, response) {
+  const personId = request.body.personId;
+  // haal de huidige gegevens op van de persoon
+  fetchJson(apiUrl + '/person/' + personId).then((apiResponse) => {
+    try {
+      apiResponse.data.custom = JSON.parse(apiResponse.data.custom)
+    } catch (e) {
+      apiResponse.data.custom = {}
+    }
+
+    // voeg like toe
+    apiResponse.data.custom.likes = (apiResponse.data.custom.likes || 0) + 1;
+
+    // overschrijf custom field
+    fetchJson(apiUrl + '/person/' + personId, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        custom: apiResponse.data.custom
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    }).then((patchResponse) => {
+      response.redirect(303, '/')
+    })
+  })
+})
+
+// Maak een POST route voor de index
 app.post('/squad/:id', function (request, response) {
   const personId = request.body.personId;
   // haal de huidige gegevens op van de persoon

@@ -67,26 +67,26 @@ searchInput.addEventListener("input", function(){
 // ============================================================
 //sort menu
 // ============================================================
-// let sortMenu = document.querySelector('.sort-menu');
-// let sortOptions = sortMenu.querySelectorAll('option');
+let sortMenu = document.querySelector('.sort-menu');
+let sortOptions = sortMenu.querySelectorAll('option');
 
-// sortMenu.addEventListener("change", function(){
-//     sortOptions.forEach(option => {
-//         let optionValue = option.value;
+sortMenu.addEventListener("change", function(){
+    sortOptions.forEach(option => {
+        let optionValue = option.value;
 
-//         cards.forEach(card => {
-//             let personId = card.querySelector('like-form input').value;
-//             let likeCounter = card.querySelector('.like-counter');
-//             let personName = card.querySelector('.card-front h2').textContent.toLowerCase();
+        cards.forEach(card => {
+            let personId = card.querySelector('like-form input').value;
+            let likeCounter = card.querySelector('.like-counter');
+            let personName = card.querySelector('.card-front h2').textContent.toLowerCase();
 
-//             if (optionValue == "id") {
-//                 //sort by id
-//             }else if (optionValue == "alphabetic") {
-//                 //sort by alphabet
-//             }else {
-//                 //sort by likes
-//             }
-//         })
-//     })
-// })
+            if (optionValue == "id") {
+                //sort by id
+            }else if (optionValue == "alphabetic") {
+                //sort by alphabet
+            }else {
+                //sort by likes
+            }
+        })
+    })
+})
 
