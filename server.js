@@ -28,6 +28,13 @@ app.use(express.urlencoded({extended: true}))
 app.get('/', function (request, response) {
   // Haal alle personen uit de WHOIS API op
   fetchJson(apiUrl + '/person').then((apiData) => {
+    apiData.data.forEach((person) => {
+      try {
+        person.custom = JSON.parse(person.custom);
+      } catch (e) {
+        person.custom = {};
+      }
+    });
     // apiData bevat gegevens van alle personen uit alle squads
     // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
 
