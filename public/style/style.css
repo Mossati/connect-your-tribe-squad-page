@@ -105,7 +105,7 @@ nav {
     background-size: cover;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 
-    & section {
+    & div {
         & ul {
             position: absolute;
             top: 5em;
@@ -403,7 +403,7 @@ footer {
         justify-content: space-between;
         align-items: center;
 
-        & section {
+        & div {
             & .btn-menu {
             display: none;
             }

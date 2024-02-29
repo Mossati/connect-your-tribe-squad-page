@@ -1,8 +1,8 @@
 <nav>
-    <section>
+    <div>
         <h2><%= currentPage == 'index' ? "Students" : "Squad " + squad.name %></h2>
-    </section>
-    <section>
+    </div>
+    <div>
         <button class="btn btn-menu"><i class="fa-solid fa-bars"></i> Menu</button>
         <ul class="navbar">
             <li><a href="/">All Students</a></li>
@@ -10,5 +10,5 @@
                 <li><a href="<%= currentPage == 'index' ? "./squad/" + squad.id : squad.id %>">Squad <%= squad.name %></a></li>
             <% }) %>
         </ul>
-    </section>
+    </div>
 </nav>
