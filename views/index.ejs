@@ -4,12 +4,20 @@
     <%- include('./navbar') %>
 </header>
 <main>
-    <section>
-        <!-- <h1>Students</h1> -->
-        <div class="filter-menu">
+    <section class="filter-menu">
+        <article>
             <label for="search">Search</label>
             <input type="text" name="search" id="search" placeholder="search person...">
-        </div>
+        </article>
+        <article>
+            <label for="sort">Sort</label>
+            <select class="sort-menu" name="sort" id="sort">
+                <option value="id">Id</option>
+                <option value="alphabetic">A-Z</option>
+                <option value="likes">Likes</option>
+            </select>
+        </article>
+    </section>
         <ul class="card-list">
             <% persons.forEach(person => { %>
             <% 
@@ -24,7 +32,7 @@
             })
             %>
             <li class="card-item">
-              <img src="<%= person.avatar && person.avatar.startsWith('https') ? person.avatar : "/assets/person.png" %>" alt="avatar">
+                <img src="<%= person.avatar && person.avatar.startsWith('https') ? person.avatar : "/assets/person.png" %>" alt="avatar">
                 <form class="like-form" method="post" action="">
                     <button type="submit" name="like"><i class="fa-solid fa-thumbs-up"></i></button>
                     <input type="hidden" name="personId" value="<%= person.id %>">
@@ -73,7 +81,6 @@
             </li>
             <% }) %>
         </ul>
-    </section>
 </main>
 
 <%- include('./partials/foot') %>

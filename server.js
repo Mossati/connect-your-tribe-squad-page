@@ -22,12 +22,14 @@ app.set('views', './views')
 // Gebruik de map 'public' voor statische resources, zoals stylesheets, afbeeldingen en client-side JavaScript
 app.use(express.static('public'))
 
+//Verwerken van url-gecodeerde data in POST-verzoeken
 app.use(express.urlencoded({extended: true}))
 
 // Maak een GET route voor de index
 app.get('/', function (request, response) {
   // Haal alle personen uit de WHOIS API op
   fetchJson(apiUrl + '/person').then((apiData) => {
+    //Formateer het custom veld van de API naar een JSON format
     apiData.data.forEach((person) => {
       try {
         person.custom = JSON.parse(person.custom);
@@ -39,7 +41,7 @@ app.get('/', function (request, response) {
     // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
 
     // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
-    response.render('index', {persons: apiData.data, squads: squadData.data})
+    response.render('index', {currentPage: 'index', persons: apiData.data, squads: squadData.data})
   })
 })
 
@@ -54,9 +56,11 @@ app.get('/person/:id', function (request, response) {
 
 // Maak een GET route voor een detailpagina met een request parameter id
 app.get('/squad/:id', function (request, response) {
-  // Gebruik de request parameter id en haal de juiste persoon uit de WHOIS API op
+  // Gebruik de request parameter id en haal de juiste squad uit de WHOIS API op
   fetchJson(apiUrl + '/squad/' + request.params.id).then((apiData) => {
+    //Filter alle studenten met de aangegeven squad id
     fetchJson(apiUrl + '/person?filter[squad_id]=' + request.params.id).then((personData) => {
+      //Formateer het custom veld van de API naar een JSON format
       personData.data.forEach((person) => {
         try {
           person.custom = JSON.parse(person.custom);
@@ -65,7 +69,7 @@ app.get('/squad/:id', function (request, response) {
         }
       });
       // Render person.ejs uit de views map en geef de opgehaalde data mee als variable, genaamd person
-      response.render('squad', {squad: apiData.data, persons: personData.data, squads: squadData.data})
+      response.render('squad', {currentPage: 'squad', squad: apiData.data, persons: personData.data, squads: squadData.data})
     })
   })
 })
@@ -82,7 +86,7 @@ app.post('/', function (request, response) {
     }
 
     // voeg like toe
-    apiResponse.data.custom.likes = (apiResponse.data.custom.likes || 0) + 1;
+    apiResponse.data.custom.cardlikes = (apiResponse.data.custom.cardlikes || 0) + 1;
 
     // overschrijf custom field
     fetchJson(apiUrl + '/person/' + personId, {
@@ -111,7 +115,7 @@ app.post('/squad/:id', function (request, response) {
     }
 
     // voeg like toe
-    apiResponse.data.custom.likes = (apiResponse.data.custom.likes || 0) + 1;
+    apiResponse.data.custom.cardlikes = (apiResponse.data.custom.cardlikes || 0) + 1;
 
     // overschrijf custom field
     fetchJson(apiUrl + '/person/' + personId, {

@@ -1,11 +1,14 @@
 <nav>
     <section>
-        <h2>Squad <%= squad.name %></h2>
-        <button class="btn-menu"><i class="fa-solid fa-bars"></i> Menu</button>
+        <h2><%= currentPage == 'index' ? "Students" : "Squad" + squad.name %></h2>
     </section>
-    <ul class="navbar content-hidden">
-        <% squads.forEach(squad => { %>
-            <li><a href="./squad/<%= squad.id %>">Squad <%= squad.name %></a></li>
-        <% }) %>
-    </ul>
+    <section>
+        <button class="btn btn-menu"><i class="fa-solid fa-bars"></i> Menu</button>
+        <ul class="navbar">
+            <li><a href="/">All Students</a></li>
+            <% squads.forEach(squad => { %>
+                <li><a href="<%= currentPage == 'index' ? "./squad/" + squad.id : squad.id %>">Squad <%= squad.name %></a></li>
+            <% }) %>
+        </ul>
+    </section>
 </nav>

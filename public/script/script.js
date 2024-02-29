@@ -68,25 +68,35 @@ searchInput.addEventListener("input", function(){
 //sort menu
 // ============================================================
 let sortMenu = document.querySelector('.sort-menu');
-let sortOptions = sortMenu.querySelectorAll('option');
 
 sortMenu.addEventListener("change", function(){
-    sortOptions.forEach(option => {
-        let optionValue = option.value;
+    let sortOption = sortMenu.value;
 
-        cards.forEach(card => {
-            let personId = card.querySelector('like-form input').value;
-            let likeCounter = card.querySelector('.like-counter');
-            let personName = card.querySelector('.card-front h2').textContent.toLowerCase();
+    cards = Array.from(cards);
 
-            if (optionValue == "id") {
-                //sort by id
-            }else if (optionValue == "alphabetic") {
-                //sort by alphabet
-            }else {
-                //sort by likes
-            }
-        })
-    })
-})
+    cards.sort((a, b) => {
+        let aValue;
+        let bValue;
+
+        if (sortOption === "id") {
+            aValue = parseInt(a.querySelector('.like-form input').value);
+            bValue = parseInt(b.querySelector('.like-form input').value);
+            return aValue - bValue;
+        } else if (sortOption === "alphabetic") {
+            aValue = a.querySelector('.card-front h2').textContent.toLowerCase();
+            bValue = b.querySelector('.card-front h2').textContent.toLowerCase();
+            return aValue.localeCompare(bValue);
+        } else if (sortOption === "likes") {
+            aValue = parseInt(a.querySelector('.like-counter').textContent);
+            bValue = parseInt(b.querySelector('.like-counter').textContent);
+            return bValue - aValue;
+        }
+    });
+
+    let container = document.querySelector('.card-list');
+    
+    cards.forEach(card => {
+        container.appendChild(card);
+    });
+});
 
