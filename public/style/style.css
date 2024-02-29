@@ -147,7 +147,7 @@ nav {
     margin-bottom: 1em;
     width: 100%;
 
-    & article {
+    & div {
         display: flex;
         flex-direction: column;
 
@@ -451,11 +451,11 @@ footer {
         flex-direction: row;
         justify-content: space-between;
 
-        & article:nth-child(1) {
+        & div:nth-child(1) {
             width: 25%;
         }
     
-        & article {
+        & div {
             display: flex;
             flex-direction: row;
             align-items: center;

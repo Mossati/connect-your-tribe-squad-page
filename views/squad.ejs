@@ -4,20 +4,20 @@
     <%- include('./navbar') %>
 </header>
 <main>
-        <section class="filter-menu">
-            <article>
+        <div class="filter-menu">
+            <div>
                 <label for="search">Search</label>
                 <input type="text" name="search" id="search" placeholder="search person...">
-            </article>
-            <article>
+            </div>
+            <div>
                 <label for="sort">Sort</label>
                 <select class="sort-menu" name="sort" id="sort">
                     <option value="id">Id</option>
                     <option value="alphabetic">A-Z</option>
                     <option value="likes">Likes</option>
                 </select>
-            </article>
-        </section>
+            </div>
+        </div>
         <ul class="card-list">
             <% persons.forEach(person => { %>
             <% 
@@ -34,7 +34,7 @@
             <li class="card-item">
                 <img src="<%= person.avatar.includes('https') ? person.avatar : '/assets/person.png' %>" alt="avatar">
                 <form class="like-form" method="post" action="">
-                    <button type="submit" name="like"><i class="fa-solid fa-thumbs-up"></i></button>
+                    <button type="submit" name="like" aria-label="btn-like"><i class="fa-solid fa-thumbs-up"></i></button>
                     <input type="hidden" name="personId" value="<%= person.id %>">
                     <p class="like-counter"><%= person.custom.cardlikes || 0 %></p>
                 </form>
