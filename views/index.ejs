@@ -33,7 +33,7 @@
             %>
             <li class="card-item">
                 <img src="<%= person.avatar && person.avatar.startsWith('https') ? person.avatar : "/assets/person.png" %>" alt="avatar">
-                <form class="like-form" method="post" action="">
+                <form class="like-form" method="post" action="/">
                     <button type="submit" name="like" aria-label="btn-like"><i class="fa-solid fa-thumbs-up"></i></button>
                     <input type="hidden" name="personId" value="<%= person.id %>">
                     <p class="like-counter"><%= 0 %></p>
