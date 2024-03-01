@@ -38,10 +38,8 @@ btnMenu.addEventListener("click", function() {
     }else {
         btnMenu.innerHTML = '<i class="fa-solid fa-bars"></i> Menu';
     }
-
+    
     //toggle navbar menu
-    navbar.classList.toggle('content-visible');
-    navbar.classList.toggle('content-hidden');
     navbar.classList.toggle('menu-slide');
 })
 // ============================================================
