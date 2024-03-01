@@ -40,7 +40,13 @@ btnMenu.addEventListener("click", function() {
     }
     
     //toggle navbar menu
-    navbar.classList.toggle('menu-slide');
+    if (navbar.classList.contains('menu-slide-right')) {
+        navbar.classList.remove('menu-slide-right');
+        navbar.classList.toggle('menu-slide-left');
+    }else {
+        navbar.classList.remove('menu-slide-left');
+        navbar.classList.toggle('menu-slide-right');
+    }
 })
 // ============================================================
 //search person

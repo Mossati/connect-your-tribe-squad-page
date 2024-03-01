@@ -386,16 +386,28 @@ footer {
     to {transform: scaleX(1);}
 }
 
-.menu-slide {
-    animation-name: menuSlide;
+.menu-slide-right {
+    animation-name: menuSlideR;
     animation-duration: 1s;
     animation-fill-mode: forwards;
     top: 5em;
 }
 
-@keyframes menuSlide {
+.menu-slide-left {
+    animation-name: menuSlideL;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    top: 5em;
+}
+
+@keyframes menuSlideR {
     from {transform: translateX(100%);}
     to {transform: translateX(0);}
+}
+
+@keyframes menuSlideL {
+    from {transform: translateX(0);}
+    to {transform: translateX(100%);}
 }
 /* ================================================= */
 /* mediaquery */
