@@ -19,6 +19,14 @@
 
 ## Kenmerken
 <!-- Bij Kenmerken staat welke technieken zijn gebruikt en hoe. Wat is de HTML structuur? Wat zijn de belangrijkste dingen in CSS? Wat is er met Javascript gedaan en hoe? Misschien heb je een framwork of library gebruikt? -->
+**Node.js**
+* Node.js is een platform waarmee je JavaScript kunt gebruiken om server-side applicaties te maken.
+
+**Express**
+* Express is een framework bovenop Node.js om het bouwen van webapplicaties eenvoudiger te maken.
+
+**EJS**
+* EJS is een template-engine voor Node.js en Express die HTML-pagina's dynamisch maakt door JavaScript-code in de HTML op te nemen.
 
 ## Installatie
 <!-- Bij Installatie staat stap-voor-stap beschreven hoe je de development omgeving moet inrichten om aan de repository te kunnen werken. -->
