@@ -6,7 +6,7 @@
         <button class="btn btn-menu"><i class="fa-solid fa-bars"></i> Menu</button>
         <ul class="navbar">
             <li><a href="/">All Students</a></li>
-            <% squads.forEach(squad => { %>
+            <% squads.slice(2).forEach(squad => { %>
                 <li><a href="<%= currentPage == 'index' ? "./squad/" + squad.id : squad.id %>">Squad <%= squad.name %></a></li>
             <% }) %>
         </ul>
